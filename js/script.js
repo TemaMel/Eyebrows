@@ -30,6 +30,8 @@ let swiper = new Swiper('.masters-swiper', {
     // direction: 'horizonal',
     slidesPerView: 5.8,
     spaceBetween: 30,
+    loop: true,
+    
     // centeredSlides: true,
     breakpoints: {
       1660: {
@@ -51,9 +53,18 @@ let swiper = new Swiper('.masters-swiper', {
       576: {
           slidesPerView: 1.9,
       },
+      450: {
+        slidesPerView: 1.5,
+      },
+      410: {
+        slidesPerView: 1.3,
+      },
       360: {
           slidesPerView: 1.2,
       },
+      300: {
+        slidesPerView: 1,
+    },
     },
   
   
@@ -62,6 +73,11 @@ let swiper = new Swiper('.masters-swiper', {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
+});
+
+swiper.on('slideChange', ({ el, slides, activeIndex }) => {
+    el.querySelector('.masters-swiper-descr')?.classList.remove('masters-swiper-descr-active');
+    slides[activeIndex].querySelector('.masters-swiper-descr').classList.add('masters-swiper-descr-active');
 });
 
 
@@ -104,27 +120,43 @@ const swiperReviews = new Swiper('.reviews-swiper', {
   
   });
 
+let heroMenu = document.querySelector('.hero-menu'),
+    hamburger = document.querySelector('.hamburger'),
+    mobile = document.querySelector('.mobile'),
+    mobileClose = document.querySelector('.mobile-close'),
+    heroMenuBtn = document.querySelector('.hero-menu-btn');
+    popup = document.querySelector('.popup'),
+    popupClose = document.querySelector('.popup-close');
 
-// if (mastersSlide.classList.contains('swiper-slide-active')) {
-//     masterDescr.classList.add('masters-swiper-descr-active')
-// } else {
-//     masterDescr.classList.remove('masters-swiper-descr-active')
-// }
+window.addEventListener('scroll', function() {
+    let positionTop = window.scrollY;
+    // console.log(positionTop);
+    if (positionTop > 860) {
+        heroMenu.classList.add('hero-menu-active');
+    } 
+});
+
+hamburger.addEventListener('click', function() {
+    heroMenu.classList.remove('hero-menu-active'),
+    heroMenu.classList.add('hero-menu-disable')
+    mobile.classList.add('mobile-active');
+});
+
+mobileClose.addEventListener('click', function() {
+  heroMenu.classList.add('hero-menu-active'),
+  heroMenu.classList.remove('hero-menu-disable')
+  mobile.classList.remove('mobile-active');
+})
 
 
 
-// $(document).ready(function() {
-//     $('.price-item').click(function() {
-//         const parent = $(this).parent();
-//         if (parent.hasClass('price-item-active')) {
-//             parent.removeClass('price-item-active'),
-//             $('.price-item-title').removeClass('price-item-title-active'),
-//             $('.price-item-list').removeClass('price-item-list-active');
-//         } else {
-//             parent.addClass('price-item-active'),
-//             $('.price-item-title').addClass('price-item-title-active'),
-//             $('.price-item-list').addClass('price-item-list-active');
-//         }
-//     })
-// })
+heroMenuBtn.addEventListener('click', function() {
+    popup.classList.add('popup-active')
+});
+
+popupClose.addEventListener('click', function() {
+    popup.classList.remove('popup-active')
+});
+
+
 

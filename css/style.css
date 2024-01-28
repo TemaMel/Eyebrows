@@ -213,6 +213,18 @@ body {
   justify-content: center;
   align-items: center;
 }
+.hero-menu-disable {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.hero-menu-active {
+  position: fixed;
+  top: 2%;
+  left: -50%;
+  transform: translateX(50%);
+  z-index: 100;
+}
 .hero-menu-list {
   padding: 0;
   width: 925px;
@@ -261,6 +273,11 @@ body {
   background: rgba(182, 121, 128, 0.8);
   box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.15) inset;
   cursor: pointer;
+  transition: 0.3s background ease-in;
+}
+.hero-menu-btn:hover {
+  border: 1px solid #767878;
+  background: rgba(255, 255, 255, 0.1);
 }
 .hero .hamburger {
   display: none;
@@ -665,6 +682,10 @@ body {
   font-weight: 700;
   line-height: 100%;
   text-transform: uppercase;
+  transition: 0.3s all;
+}
+.extra-link:hover {
+  color: #fff;
 }
 
 .reviews {
@@ -685,6 +706,7 @@ body {
   align-items: center;
   height: 47px;
   gap: 15px;
+  position: relative;
 }
 .reviews-swiper {
   margin-top: 55px;
@@ -733,6 +755,10 @@ body {
   font-size: 12px;
   font-weight: 700;
   line-height: 90%;
+  transition: 0.3s all;
+}
+.reviews-slide-link:hover {
+  color: #fff;
 }
 .reviews-slide-name {
   display: flex;
@@ -848,6 +874,125 @@ body {
   font-size: 12px;
   font-weight: 700;
   line-height: normal;
+}
+
+.mobile {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+.mobile-header {
+  padding: 0 16px 0 9px;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background: url("../img/mob/mob-header.png") center center/cover no-repeat;
+}
+.mobile-close {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid #767878;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.15) inset;
+  padding: 15.5px;
+}
+.mobile-close img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.mobile-btn {
+  color: #FFF;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 129px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid #B67980;
+  background: rgba(182, 121, 128, 0.8);
+  box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.15) inset;
+}
+.mobile-menu {
+  width: 100%;
+  padding: 0 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  justify-content: center;
+  align-items: end;
+  row-gap: 15px;
+  margin-top: 5px;
+}
+.mobile-menu-link {
+  color: #FFF;
+  text-align: center;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+  text-transform: uppercase;
+  display: flex;
+  width: 129px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid #767878;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.15) inset;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+}
+.mobile-active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup {
+  position: fixed;
+  right: 0;
+  width: 670px;
+  height: 1100px;
+  top: 100%;
+  z-index: 100;
+  border-radius: 20px;
+  transition: 0.6s all;
+  visibility: hidden;
+}
+.popup-active {
+  visibility: visible;
+  top: 5%;
+}
+.popup-close {
+  display: block;
+  position: absolute;
+  font-size: 56px;
+  color: #D9D9D9;
+  cursor: pointer;
+  top: -5%;
+  right: 5%;
+}
+.popup-link {
+  display: block;
+  width: 613px;
+  height: 1013px;
+  text-decoration: none;
+  background: url("../img/popup/popup.png") center center/cover no-repeat;
 }
 
 @media (max-width: 1660px) {
@@ -1269,6 +1414,21 @@ body {
   .portfolio-gallery {
     width: 500%;
   }
+  .popup {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+  .popup-link {
+    height: 1000px;
+    background: url("../img/popup/mobPop-pop.png") center center/cover no-repeat;
+    width: 340px;
+  }
+  .popup-close {
+    top: -4%;
+  }
 }
 @media (max-width: 577px) {
   .container {
@@ -1284,6 +1444,9 @@ body {
   .header-logo {
     width: 121px;
     height: 14px;
+  }
+  .hero-menu-active {
+    bottom: 5%;
   }
   .hero-title {
     top: 55px;
@@ -1398,6 +1561,9 @@ body {
     margin-top: 190px;
     padding: 10px;
   }
+  .reviews-title {
+    margin-top: 25px;
+  }
   .reviews-subtitle {
     margin-top: 30px;
   }
@@ -1408,8 +1574,10 @@ body {
     align-items: center;
   }
   .reviews-slash {
+    position: absolute;
+    height: 2px;
     width: 100%;
-    height: 1px;
+    background: #fff;
   }
   .reviews-slide {
     padding: 40px 20px;
@@ -1446,12 +1614,14 @@ body {
     text-align: center;
     -moz-column-gap: 30px;
          column-gap: 30px;
+    margin-top: 0;
   }
   .descr-text {
     margin-top: 30px;
     width: 100%;
   }
   .descr-slash {
+    display: block;
     margin-top: 30px;
     width: 100%;
     height: 1px;
@@ -1459,6 +1629,9 @@ body {
   }
   .masters {
     padding-bottom: 150px;
+  }
+  .title {
+    padding-left: 25px;
   }
 }
 @keyframes rotation {
