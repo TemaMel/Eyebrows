@@ -128,13 +128,30 @@ let heroMenu = document.querySelector('.hero-menu'),
     popup = document.querySelector('.popup'),
     popupClose = document.querySelector('.popup-close');
 
+
 window.addEventListener('scroll', function() {
-    let positionTop = window.scrollY;
-    // console.log(positionTop);
-    if (positionTop > 860) {
-        heroMenu.classList.add('hero-menu-active');
+  let positionTop = window.scrollY;
+  console.log(positionTop);
+  var x = window.matchMedia("(max-width: 576px)");
+  var y = window.matchMedia("(max-width: 1920px)");
+  if(x.matches) {
+    if (positionTop > 282) {
+      // console.log('hey');
+      heroMenu.classList.add('hero-menu-mob');
     } 
-});
+    else {
+      heroMenu.classList.remove('hero-menu-mob');
+    }
+  }
+  if(y.matches) {
+    if (positionTop > 850) {
+      heroMenu.classList.add('hero-menu-active');
+    } else {
+      heroMenu.classList.remove('hero-menu-active');
+    }
+  }
+})
+
 
 hamburger.addEventListener('click', function() {
     heroMenu.classList.remove('hero-menu-active'),
@@ -149,14 +166,100 @@ mobileClose.addEventListener('click', function() {
 })
 
 
+// this._el.addEventListener('click', (e) => {
+//   const elHeader = e.target.closest('.price-item-title');
+//   console.log(elHeader);
+//   if (!elHeader) {
+//     return;
+//   }
+//   if (!this._config.alwaysOpen) {
+//     const elOpenItem = this._el.querySelector('.price-item-show');
+//     if(elOpenItem) {
+//       elOpenItem !== elHeader.parentElement ? elOpenItem.classList.togggle('price-item-show') : null;
+//     }
+//   }
+//   elHeader.parentElement.classList.toggle('.price-item-show');
+// });
 
-heroMenuBtn.addEventListener('click', function() {
-    popup.classList.add('popup-active')
-});
 
-popupClose.addEventListener('click', function() {
-    popup.classList.remove('popup-active')
-});
+// window.addEventListener('click', function(event) {
+//   if (event.target.hasAttribute('data-cart')) {
+//         let priceItem = document.querySelector('.price-item'),
+//             priceItemTitle = document.querySelector('.price-item-title'),
+//             priceItemList = document.querySelector('.price-item-list');
+          
+//         // priceItem.classList.add('price-item-active'),
+//         // priceItemTitle.classList.add('price-item-title-active'),
+//         // priceItemList.classList.add('price-item-list-active');
+//         if(priceItem.classList.contains('price-item-active')) {
+//           priceItem.classList.remove('price-item-active'),
+//           priceItemTitle.classList.remove('price-item-title-active'),
+//           priceItemList.classList.remove('price-item-list-active');
+//         }
+//         else {
+//           priceItem.classList.add('price-item-active'),
+//           priceItemTitle.classList.add('price-item-title-active'),
+//           priceItemList.classList.add('price-item-list-active');
+//         }
+//         console.log('привет');
+//       }
+// })
 
 
+
+
+$(function(){
+  //обрабатываем клик по блоку с классом trigger
+  $('.trigger').on('click', function(e){
+      e.preventDefault();
+  //получаем нужные нам данные
+          var $this = $(this),
+          //получаем всё блоки menu
+          container = $this.closest('.menu'),
+          //получаем li по которому кликнули
+          item = $this.closest('.item'),
+          //получаем все другие li
+          items = container.find('.item'),
+          //выбираем из li активный
+          activeItem = items.filter('.active'),
+          //выбираем из li по которому кликнули блок контен
+          content = item.find('.content'),
+          //выбираем у li с классом active блок контент
+          activeContent = activeItem.find('.content');
+   
+          //если нет li с классом active по которому кликнули
+          if (!item.hasClass('active')) {
+              //убираем класс active
+              items.removeClass('active');
+              //добавляем active кликнутому
+              item.addClass('active');
+              //у того у кого был active задаём ширину 0
+              activeContent.animate({
+                     'width' : '0px'
+              });
+              //кликнутому 530       
+              content.animate({
+                     'width' : '530px'
+              });
+          //иначе
+          } else {
+              item.removeClass('active');
+              content.animate({
+                     'width' : '0px'
+              });
+   
+          }
+  });
+   
+  // клик вне аккордеона
+  $(document).on('click', function (e) {
+     var $this = $(e.target);
+     if (!$this.closest('.menu').length) {
+           $('.content').animate({
+                 'width' : '0px'
+           });
+           $('.item').removeClass('active');
+     }
+  });
+  });
 
